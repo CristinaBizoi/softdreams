@@ -1,0 +1,38 @@
+.bg-nav{
+    background-color: #161e1a;
+}
+
+.custom-class{
+    background-color:#dad7cd;
+    position: relative;
+    float: left;
+    width: 60%;
+    border-radius: 15px 15px 15px 0px;
+
+}
+#special-class{
+    background-color:#a3b18a;
+    position: relative;
+    float: right; 
+    border-radius: 15px 15px 0px 15px;
+}
+#footer{
+    background-color: #161e1a;
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    color: #dad7cd;
+}
+.btn-outline-dark{
+    background-color: #161e1a;
+    color:white;
+}
+.btn-outline-dark:hover{
+    background-color: #869d7a;
+    border-color: #869d7a;
+    color: #161e1a;
+}
+.fas {
+   color:#5e935d;
+}
