@@ -31,6 +31,14 @@
         <?php 
         unset($_SESSION["message_error"]);
         } ?>
+        <!-- afisare mesaj eroare daca nu a gasit referinta  -->
+        <?php if(isset($_SESSION["error_reference"]) && $_SESSION["error_reference"] == true){ ?>
+            <div class="alert alert-danger" role="alert">
+                Reference isn't valid.
+            </div>
+        <?php 
+            unset($_SESSION["error_reference"]); }     
+         ?>
     <div class="row">
         <div class="search-status col-12 col-md-4 pb-3">
             <form method="GET" id="search-status" action="./listare">
@@ -66,9 +74,27 @@
                         <tr>
                             <td><?php echo $ticket_smth["email"]; ?></td>
                             <td><?php echo $ticket_smth["subject"]; ?></td>
-                            <td><?php echo $ticket_smth["department"]; ?></td>
+                            <td>
+                            <?php
+                                if($ticket_smth["department"] === '0'){
+                                    echo "Technical";
+                                }elseif($ticket_smth["department"] === '1'){
+                                    echo "Sales";
+                                }else{
+                                    echo "Unspecified";
+                                }
+                                
+                            ?>
+                            </td>
                             <td><?php echo $ticket_smth["created_at"]; ?></td>
-                            <td><?php echo $ticket_smth["status"]; ?></td>
+                            <td>
+                            <?php
+                                if($ticket_smth["status"] == 0){
+                                    echo "Deschis";
+                                }elseif($ticket_smth["status"] == 1){
+                                    echo "Inchis";
+                                }
+                            ?>
                             <td>
                             <a href="./view?referinta=<?php echo $ticket_smth["reference"]; ?>"><i class="fas fa-eye"></i></a>
                             <a class="delete" data-toggle="modal" data-type="delete" data-target="#exampleModal" href="#" data-href="./delete_action?referinta=<?php echo $ticket_smth["reference"]; ?>" ><i class="fas fa-trash-alt"></i></a>

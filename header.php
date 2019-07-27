@@ -29,8 +29,8 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <!-- verific care este pagina curenta si o evidentiez -->
-          <li class="nav-item <?php echo ($current_page == 'create') ? 'active' : '' ; ?>  ">
-            <a class="nav-link" href="./create">Create</a>
+          <li class="nav-item <?php echo ($current_page == 'utilizator') ? 'active' : '' ; ?>  ">
+            <a class="nav-link" href="./utilizator">User Page</a>
           </li>
           <li class="nav-item <?php echo ($current_page == 'listare') ? 'active' : '' ; ?>">
             <a class="nav-link" href="./listare">Ticket list</a>

@@ -8,6 +8,7 @@ if(!$request->getPost("content") || strlen($request->getPost("content")) == 0){
 }
 if($error == false){
     $reply->create($_POST);
+    $_SESSION["comment_success"] = true;
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }elseif($error == true){
     $_SESSION["comment_error"] = true;

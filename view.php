@@ -7,15 +7,25 @@
     if($request->getQuery("referinta") && !empty($request->getQuery("referinta"))){
         // var_dump($ticket->findByReference($_GET["referinta"]));
         $ticket_r = $ticket->findByReference($request->getQuery("referinta"));
+        // var_dump($ticket_r);
     }else{
       header('Location:./listare');
+    }
+    if(!$ticket_r){
+      $_SESSION["error_reference"] = true;
+      if($_SESSION["last_page"]=='utilizator'){
+        header('Location:./utilizator');
+      }
+      elseif($_SESSION["last_page"]=='listare'){
+        header('Location:./listare');
+      }
     }
     // selectez toate comentariile pentru ticketul curent
     $id = $ticket_r["id"];
     $reply = new Reply($db);
     $replies = $reply->allById($id);
     // atribui rolul in functie de ultima pagina vizitata pentru a modifica ulterior culorile comentariilor in functie de aceasta
-    if($_SESSION["last_page"] == "create"){
+    if($_SESSION["last_page"] == "utilizator"){
       $rol = 0;
     }else{
       $rol=1;
@@ -27,15 +37,15 @@
  <div class="container py-4">
    <!-- alerta succes pentru formularul de create ticket -->
       <div class="mt-3 col-12 col-md-6">
-        <?php if(isset($_SESSION["message"])){ ?>
-          <div class="alert alert-success" role="alert">
-              <?php echo $_SESSION["message"]; ?>
-          </div>
-        <?php 
-        unset($_SESSION["message"]);
-        } ?>
-        <h1 class="mb-4"> View Ticket </h1>
-        <form method="POST" action="./create_action">
+        <?php if(isset($_SESSION["comment_success"]) && $_SESSION["comment_success"] == true ){ ?>
+            <div class="alert alert-success" role="alert">
+                Comment was created.
+            </div>
+          <?php 
+          unset($_SESSION["comment_success"]);
+          } ?>
+        <h1 class="mb-4"> View Ticket (<?php echo $ticket_r["reference"]; ?>)</h1>
+        <form>
           <div class="form-group">
             <label for="department">Department</label>
             <select class="form-control" id="department" disabled name="department">

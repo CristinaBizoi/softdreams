@@ -17,12 +17,13 @@ if(count($error)){
     // salvez in sesiune valorile adaugate de user si erorile respective
     $_SESSION ["old_values"] = $_POST;
     $_SESSION ["errors"] = $error;
-    header('Location:./create');
+    header('Location:./utilizator');
 }else{
     // salvez in sesiune un mesaj de success in cazul in care formularul a fost completat ok si redirectez catre view
     $_SESSION["message"] = "Ticket created";
     $reference = $ticket->create($_POST);
-    header('Location:./view?referinta='.$reference);
+    $_SESSION["referinta"] = $reference;
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 ?>
